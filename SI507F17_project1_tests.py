@@ -4,11 +4,12 @@ import unittest
 from SI507F17_project1_cards import *
 
 # Write your unit tests to test the cards code here.
-# You should test to ensure that everything explained in the code description file works as that file says.## If you have correctly written the tests, at least 3 tests should fail. If more than 3 tests fail, it should be because multiple of the test methods address the same problem in the code.
+# You should test to ensure that everything explained in the code description file works as that file says.
+# If you have correctly written the tests, at least 3 tests should fail.
+# If more than 3 tests fail, it should be because multiple of the test methods address the same problem in the code.
 # You may write as many TestSuite subclasses as you like, but you should try to make these tests well-organized and easy to read the output.
 # You should invoke the tests with verbosity=2 (make sure you invoke them!)
 
-#
 class ClassTests(unittest.TestCase):   
     def setUp(self):
         self.card = Card()
@@ -25,7 +26,7 @@ class ClassTests(unittest.TestCase):
         self.assertTrue(self.card.rank_levels)
         self.assertTrue(self.card.faces)
         
-    #Rank tests        
+#   Rank tests        
     def test_Rank_Type(self):
         self.assertEqual(type(self.card.rank_levels), type([]))
         
@@ -39,11 +40,11 @@ class ClassTests(unittest.TestCase):
     def test_variable_count(self):
         i = 0
         for item in self.card.rank_levels:
-            print(item)
+#            print(item)
             self.assertEqual(item, i+1)
             i += 1
 
-    #These are the test for the Faces
+#   These are the test for the Faces
     def test_faces(self):
         self.assertEqual(type(self.card.faces), type({}))
         
@@ -65,14 +66,11 @@ class ClassTests(unittest.TestCase):
     def test_FaceKingThirteen(self):
         self.assertTrue(self.card.faces[13], "King")
 
-
     def test_RankTotal(self):
         total = 6227020800
         factorial = 1
-
         for item in self.card.rank_levels:
-            factorial = factorial * item
-            
+            factorial = factorial * item           
         self.assertEqual(total, factorial)
 
     def test_SelfSuitisStrinandSuit(self):
@@ -98,6 +96,7 @@ class ClassTests(unittest.TestCase):
             self.assertEqual(self.card.rank, "Ace")
         else:
             pass
+        
     def test_SelfRanNum(self):
         self.assertEqual(type(self.card.rank_num), int)
         
@@ -106,24 +105,22 @@ class ClassTests(unittest.TestCase):
 
     def testSDefaultConstructor(self):
         card2 = str(self.card.rank_num)
-        print(card2)
+#       print(card2)
         self.assertEqual(type(str(self.card)), str)
 
     def test_strClass(self): # BUG1
         for n in range(4):
             for k in range(1,14):
                 self.card = Card(n, k) 
-                print(str(self.card))
+#               print(str(self.card))
         Test = Card(3, 13)
         self.assertEqual(str(Test), "Ace of Spades")
-
 
 class DeckTest(unittest.TestCase):
     
     def setUp(self):
             self.deck = Deck()
             self.card = Card()
-
 
     def test_Consructor_Test(self):
         self.assertRaises(TypeError, Deck(0))
@@ -142,13 +139,11 @@ class DeckTest(unittest.TestCase):
         self.assertEqual(len(self.deck.cards), 52)
 
     def test_CardInstance(self):
-        print(type(Deck))
-        print(type(Card))
-        print(type(self.deck.cards))
-
+#        print(type(Deck))
+#        print(type(Card))
+#        print(type(self.deck.cards))
         self.assertIsInstance(self.deck, Deck)
         
-
     def test_DeckHasAll(self):
         for i in range(13):
             
@@ -178,74 +173,63 @@ class DeckTest(unittest.TestCase):
         deck = str(self.deck)
         split = deck.split("\n")
         self.assertEqual(52, len(split))
-        #deck3 = self.deck
-        #deck2 = random.shuffle(deck3)
-        #deck4 = str(deck2)
-        print(deck)#BUG BUG BUG BUG
-        #print(type(self.deck.cards))
-        #print(deck4)
+#       deck3 = self.deck
+#       deck2 = random.shuffle(deck3)
+#       deck4 = str(deck2)
+#       print(deck)#BUG BUG BUG BUG
+#       print(type(self.deck.cards))
+#       print(deck4)
 
     def test_ifitprintsAce(self):
         deck = str(self.deck)
         split = deck.split("\n")
         self.assertEqual(52, len(split))
         
-    def test_equivalenceinTest(self): #BUG2 (due to the same reason maybe?
+    def test_equivalenceinTest(self): # BUG2 (due to the same reason maybe?
         self.assertEqual(str(self.deck.cards[0]),"Ace of Diamonds")
                          
     def test_typeofPop_cardDefault(self):
         card = self.deck.pop_card()
-        print(str(card))
+#        print(str(card))
         
     def test_typeofPop_cardInteger(self):
         card = self.deck.pop_card(2)
-        print(str(card))
+#       print(str(card))
 
     def test_Popall(self):
         for i in range(52):
             self.deck.pop_card()
-            print(len(self.deck.cards))
-        #self.assertRaises(IndexError, self.deck.pop_card())
-
-        
+#            print(len(self.deck.cards))
+#       self.assertRaises(IndexError, self.deck.pop_card())
 
     def test_methodReplace(self):
         deck = self.deck.shuffle()
         listOne = Deck()
-
         listingOne = str(listOne)
         splitOne = listingOne.split("\n")
-
         listingTwo = str(self.deck)
         splitTwo = listingTwo.split("\n")
-
         self.assertNotEqual(splitOne, splitTwo)
 
     def test_method_replace(self):
-        #for i in range(52):
-            #self.assertIsInstance(self.card, Card)
+#       for i in range(52):
+#           self.assertIsInstance(self.card, Card)
         deck = self.deck
         listOne = Deck()
-
         listingOne = str(listOne)
         splitOne = listingOne.split("\n")
-        print(len(splitOne))
-
+#       print(len(splitOne))
         listingTwo = str(self.deck)
         splitTwo = listingTwo.split("\n")
-
         self.assertEqual(splitOne, splitTwo)
-        
         self.card = Card(0,4)
         self.deck.replace_card(self.card)
-
         listingThree = str(self.deck)
         splitThree = listingThree.split("\n")
-        print(len(splitThree))
-        print(len(splitOne))
+#       print(len(splitThree))
+#       print(len(splitOne))
 
         self.assertEqual(len(splitThree), len(splitOne))
-
 
     def tests_thatEveryCardIsInDeck(self):
         listingTwo = str(self.deck)
@@ -257,76 +241,66 @@ class DeckTest(unittest.TestCase):
                 self.assertIn(str(self.card), splitTwo)
 
     def test_method_ifCardOut(self):
-        #for i in range(52):
-            #self.assertIsInstance(self.card, Card)
-        
+#       for i in range(52):
+#           self.assertIsInstance(self.card, Card) 
         self.card = Card(3,13)
-        print(str(self.card))
-        
+#        print(str(self.card))       
         listingThree = str(self.deck)
         splitThree = listingThree.split("\n")
-    
         popped_card = self.deck.pop_card()
-        print(str(popped_card))
-        print(len(self.deck.cards))
-
+#        print(str(popped_card))
+#        print(len(self.deck.cards))
         self.assertEqual(len(splitThree), len(self.deck.cards))
 
-
     def test_method_ifCardOut(self):
-        #for i in range(52):
-            #self.assertIsInstance(self.card, Card)
+#       for i in range(52):
+#           self.assertIsInstance(self.card, Card)
         
         self.card = Card(1,13)
-        print(str(self.card))
+#        print(str(self.card))
         
         listingThree = str(self.deck)
         splitThree = listingThree.split("\n")
     
         popped_card = self.deck.pop_card()
-        print(str(popped_card))
-        print(len(self.deck.cards))
+#        print(str(popped_card))
+#        print(len(self.deck.cards))
 
         self.deck.replace_card(self.card)
-        print(len(self.deck.cards))
+#        print(len(self.deck.cards))
 
         self.assertNotEqual(len(splitThree), len(self.deck.cards))
 
     def test_methodJustFail(self):
         self.card = Card(1,13)
-        print(len(self.deck.cards))
+#        print(len(self.deck.cards))
 
         self.deck.replace_card(self.card)
-        print(len(self.deck.cards))
+#        print(len(self.deck.cards))
 
         self.deck.replace_card(self.card)
-        print(len(self.deck.cards))
+#        print(len(self.deck.cards))
 
     def test_sort(self): #Bug3
-        #self.deck.shuffle()
-        #print(str(self.deck))
-        #self.deck.sort_cards()
-        #print(str(self.deck))
-        
-        #print(str(self.deck))
+#       self.deck.shuffle()
+#       print(str(self.deck))
+#       self.deck.sort_cards()
+#       print(str(self.deck))
+#       print(str(self.deck))
         self.deck.pop_card()
         lenghtPopped = len(self.deck.cards)
-
         self.deck.shuffle()
-        #print(len(self.deck.cards))
-        #print(str(self.deck))
+#       print(len(self.deck.cards))
+#       print(str(self.deck))
         self.deck.sort_cards()
-        #print(str(self.deck))
+#       print(str(self.deck))
         lenghtSort = len(self.deck.cards)
-
         self.assertEqual(lenghtPopped, lenghtSort)       
         
-
     def test_deal(self): #BUG4
         for i in range(3):
             self.deck.pop_card()
         self.assertRaises(IndexError, self.deck.deal_hand(52))
-
 
     def test_Game(self):
         self.assertEqual(type(play_war_game("TRUE")), type(()))
