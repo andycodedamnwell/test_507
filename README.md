@@ -1,5 +1,7 @@
 # Testing the SI507F17_project_cards.py file
 
+My name: Xunan Zhou
+M mail: andyzhou@umich.edu
 This is code for a very fun card game. It is pretty trivial so run it and have fun. The project is also an attempt by a mediocre (even novice) programmer to write a bunch of tests for a Card game script. The script has at least 3 bugs, therefore the goal of the tests were to uncover the bugs.
 In the test file there are two class defined: the first class are the test functions for the class Cards and the second are test functions for Deck. The last also includes code to test the game.  
 
